@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-21
+                    2020-11-14
                 </div>
                 
 
@@ -458,9 +458,50 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>#NOTE</p>
+                <p>#快速排序</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个长度为n的整数数列，以及一个整数k，请用快速选择算法求出数列从小到大排序后的第k个数。</p>
+<p>输入格式<br>第一行包含两个整数 n 和 k。</p>
+<p>第二行包含 n 个整数（所有整数均在1~109范围内），表示整数数列。</p>
+<p>输出格式<br>输出一个整数，表示数列的第k小数。</p>
+<p>数据范围<br>1≤n≤100000,<br>1≤k≤n</p>
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><pre><code>输入
+5 3
+2 4 1 5 3
+</code></pre>
+<pre><code>输出
+3</code></pre>
 <hr>
-<p><img src="https://i.loli.net/2020/10/21/QyufzcNwg3YFDa8.png" alt="基础知识.png"></p>
+<h4 id="C-代码"><a href="#C-代码" class="headerlink" title="C++ 代码"></a>C++ 代码</h4><pre><code>#include&lt;iostream&gt;
+
+using namespace std;
+
+const int m = 1e5+10;
+int a[m];
+
+void quick_sort( int a[],int l,int r)&#123;
+    if(l&gt;=r) return;
+
+    int x = a[(l+r)/2], i = l - 1,j = r + 1;
+    while( i &lt; j )&#123;
+        while( a[++i] &lt; x );
+        while( a[--j] &gt; x);
+        if(i &lt; j) swap(a[i],a[j]);
+    &#125;
+    quick_sort(a,j+1,r);
+    quick_sort(a,l,j);
+
+&#125;
+
+int main()&#123;
+    int n,k,i;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+    for( i = 0; i &lt; n; ++i)
+        scanf(&quot;%d&quot;,&amp;a[i]);
+    quick_sort(a,0,n-1);
+    printf(&quot;%d &quot;,a[k-1] );
+    return 0;
+&#125;
+</code></pre>
 
             </div>
             <hr/>
@@ -486,7 +527,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jingdetdw.com/2020/10/21/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/">https://jingdetdw.com/2020/10/21/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/</a>
+                    <a href="https://jingdetdw.com/2020/11/14/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">https://jingdetdw.com/2020/11/14/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -563,9 +604,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/11/14/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
                     <div class="card-image">
@@ -587,9 +629,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -598,6 +640,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -608,7 +651,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/17/THE%20GOAL%20IN%202020/">
+                <a href="/2020/10/21/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
                         
@@ -620,7 +663,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #FLAGI have set my goals to enrich my konwledge system so that I will find something interesting in computer science.
+                            #NOTE
 
 
 
@@ -628,7 +671,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-21
                             </span>
                         <span class="publish-author">
                             
