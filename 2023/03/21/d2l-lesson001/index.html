@@ -431,16 +431,16 @@ torch<span class="token punctuation">.</span>cat<span class="token punctuation">
          [ 8.,  9., 10., 11.,  4.,  3.,  2.,  1.]]))
 </code></pre>
 <p>有时，我们想通过<em>逻辑运算符</em>构建二元张量。 以<code>X == Y</code>为例： 对于每个位置，如果<code>X</code>和<code>Y</code>在该位置相等，则新张量中相应项的值为1。 这意味着逻辑语句<code>X == Y</code>在该位置处为真，否则该位置为0。</p>
-<pre><code>X == Y
+<pre class=" language-python"><code class="language-python">X <span class="token operator">==</span> Y
 </code></pre>
-<pre><code>tensor([[False,  True, False,  True],
-        [False, False, False, False],
-        [False, False, False, False]])
+<pre class=" language-python"><code class="language-python">tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">,</span>  <span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span>  <span class="token boolean">True</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 </code></pre>
 <p>对张量中的所有元素进行求和，会产生一个单元素张量。</p>
-<pre><code>X.sum()
+<pre class=" language-python"><code class="language-python">X<span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<pre><code>tensor(66.)
+<pre class=" language-python"><code class="language-python">tensor<span class="token punctuation">(</span><span class="token number">66</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
 </code></pre>
 <h3 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h3><p>在上面的部分中，我们看到了如何在相同形状的两个张量上执行按元素操作。 在某些情况下，即使形状不同，我们仍然可以通过调用 <em>广播机制</em>（broadcasting mechanism）来执行按元素操作。 这种机制的工作方式如下：</p>
 <ol>
@@ -448,23 +448,23 @@ torch<span class="token punctuation">.</span>cat<span class="token punctuation">
 <li>对生成的数组执行按元素操作。</li>
 </ol>
 <p>在大多数情况下，我们将沿着数组中长度为1的轴进行广播，如下例子：</p>
-<pre><code>a = torch.arange(3).reshape((3, 1))
-b = torch.arange(2).reshape((1, 2))
-a, b
+<pre class=" language-python"><code class="language-python">a <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+a<span class="token punctuation">,</span> b
 </code></pre>
-<pre><code>(tensor([[0],
-         [1],
-         [2]]),
- tensor([[0, 1]]))
+<pre class=" language-python"><code class="language-python"><span class="token punctuation">(</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+ tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
 <p>由于<code>a</code>和<code>b</code>分别是3×1和1×2矩阵，如果让它们相加，它们的形状不匹配。 我们将两个矩阵<em>广播</em>为一个更大的3×2矩阵，如下所示：矩阵<code>a</code>将复制列， 矩阵<code>b</code>将复制行，然后再按元素相加。</p>
-<pre><code>a + b
+<pre class=" language-python"><code class="language-python">a <span class="token operator">+</span> b
 </code></pre>
-<pre><code>tensor([[0, 1],
-        [1, 2],
-        [2, 3]])
+<pre class=" language-python"><code class="language-python">tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="索引和切片"><a href="#索引和切片" class="headerlink" title="索引和切片"></a>索引和切片</h3><pre><code>X[-1], X[1:3]
+<h3 id="索引和切片"><a href="#索引和切片" class="headerlink" title="索引和切片"></a>索引和切片</h3><pre class=" language-python"><code class="language-python">X<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> X<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span>
 </code></pre>
 <h3 id="转化为其他python对象"><a href="#转化为其他python对象" class="headerlink" title="转化为其他python对象"></a>转化为其他python对象</h3><p>将深度学习框架定义的张量转换为NumPy张量（<code>ndarray</code>）很容易，反之也同样容易。 torch张量和numpy数组将共享它们的底层内存，就地操作更改一个张量也会同时更改另一个张量。</p>
 <h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="读取数据集"><a href="#读取数据集" class="headerlink" title="读取数据集"></a>读取数据集</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> os
@@ -483,11 +483,11 @@ data <span class="token operator">=</span> pd<span class="token punctuation">.</
 <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
 </code></pre>
 <p>运行结果如下：</p>
-<pre><code>   NumRooms Alley   Price
-0       NaN  Pave  127500
-1       2.0   NaN  106000
-2       4.0   NaN  178100
-3       NaN   NaN  140000
+<pre class=" language-python"><code class="language-python">   NumRooms Alley   Price
+<span class="token number">0</span>       NaN  Pave  <span class="token number">127500</span>
+<span class="token number">1</span>       <span class="token number">2.0</span>   NaN  <span class="token number">106000</span>
+<span class="token number">2</span>       <span class="token number">4.0</span>   NaN  <span class="token number">178100</span>
+<span class="token number">3</span>       NaN   NaN  <span class="token number">140000</span>
 </code></pre>
 <h3 id="处理缺失值"><a href="#处理缺失值" class="headerlink" title="处理缺失值"></a>处理缺失值</h3><p>为了处理缺失的数据，典型的方法包括<em>插值法</em>和<em>删除法</em>， 其中插值法用一个替代值弥补缺失值，而删除法则直接忽略缺失值。</p>
 <pre class=" language-python"><code class="language-python">inputs<span class="token punctuation">,</span> outputs <span class="token operator">=</span> data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#iloc[:, 0:2]指行索引全部，列索引0-1的数据(索引从0开始标记)</span>
@@ -495,11 +495,11 @@ inputs <span class="token operator">=</span> inputs<span class="token punctuatio
 <span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
 </code></pre>
 <p>运行结果如下：</p>
-<pre><code>   NumRooms Alley
-0       3.0  Pave
-1       2.0   NaN
-2       4.0   NaN
-3       3.0   NaN
+<pre class=" language-python"><code class="language-python">   NumRooms Alley
+<span class="token number">0</span>       <span class="token number">3.0</span>  Pave
+<span class="token number">1</span>       <span class="token number">2.0</span>   NaN
+<span class="token number">2</span>       <span class="token number">4.0</span>   NaN
+<span class="token number">3</span>       <span class="token number">3.0</span>   NaN
 </code></pre>
 <p>对于<code>inputs</code>中的类别值或离散值，我们将“NaN”视为一个类别。 由于“巷子类型”（“Alley”）列只接受两种类型的类别值“Pave”和“NaN”， <code>pandas</code>可以自动将此列转换为两列“Alley_Pave”和“Alley_nan”。 巷子类型为“Pave”的行会将“Alley_Pave”的值设置为1，“Alley_nan”的值设置为0。 缺少巷子类型的行会将“Alley_Pave”和“Alley_nan”分别设置为0和1。</p>
 <pre class=" language-python"><code class="language-python">inputs <span class="token operator">=</span> pd<span class="token punctuation">.</span>get_dummies<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> dummy_na<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
@@ -508,32 +508,32 @@ inputs <span class="token operator">=</span> inputs<span class="token punctuatio
 <span class="token comment" spellcheck="true">#dummy_na:Add a column to indicate NaNs, if False NaNs are ignored.</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
 </code></pre>
-<pre><code>   NumRooms  Alley_Pave  Alley_nan
-0       3.0           1          0
-1       2.0           0          1
-2       4.0           0          1
-3       3.0           0          1
+<pre class=" language-python"><code class="language-python">   NumRooms  Alley_Pave  Alley_nan
+<span class="token number">0</span>       <span class="token number">3.0</span>           <span class="token number">1</span>          <span class="token number">0</span>
+<span class="token number">1</span>       <span class="token number">2.0</span>           <span class="token number">0</span>          <span class="token number">1</span>
+<span class="token number">2</span>       <span class="token number">4.0</span>           <span class="token number">0</span>          <span class="token number">1</span>
+<span class="token number">3</span>       <span class="token number">3.0</span>           <span class="token number">0</span>          <span class="token number">1</span>
 </code></pre>
 <p>现在<code>inputs</code>和<code>outputs</code>中的所有条目都是数值类型，它们可以转换为张量格式。 当数据采用张量格式后，可以通过张量函数来进一步操作。</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> torch
 X<span class="token punctuation">,</span> y <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>inputs<span class="token punctuation">.</span>values<span class="token punctuation">)</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>outputs<span class="token punctuation">.</span>values<span class="token punctuation">)</span>
 X<span class="token punctuation">,</span> y
 </code></pre>
-<pre><code>(tensor([[3., 1., 0.],
-         [2., 0., 1.],
-         [4., 0., 1.],
-         [3., 0., 1.]], dtype=torch.float64),
- tensor([127500, 106000, 178100, 140000]))
+<pre class=" language-python"><code class="language-python"><span class="token punctuation">(</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float64<span class="token punctuation">)</span><span class="token punctuation">,</span>
+ tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">127500</span><span class="token punctuation">,</span> <span class="token number">106000</span><span class="token punctuation">,</span> <span class="token number">178100</span><span class="token punctuation">,</span> <span class="token number">140000</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
 <h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><h3 id="张量算法的基本性质"><a href="#张量算法的基本性质" class="headerlink" title="张量算法的基本性质"></a>张量算法的基本性质</h3><p>两个矩阵的按元素乘法称为<em>Hadamard积</em>（Hadamard product）（数学符号⊙）</p>
 <h3 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h3><p>向量长度是一个L2范数</p>
-<pre><code>u = torch.tensor([3.0, -4.0])
-torch.norm(u)
+<pre class=" language-python"><code class="language-python">u <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>u<span class="token punctuation">)</span>
 </code></pre>
 <h2 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a>微积分</h2><p>绘制函数u &#x3D; f(x) 及其在x&#x3D;1处的切线y&#x3D;2x−3， 其中系数2是切线的斜率。</p>
-<pre><code>x = np.arange(0, 3, 0.1)#起点0，终点3，步长0.1
-plot(x, [f(x), 2 * x - 3], &#39;x&#39;, &#39;f(x)&#39;, legend=[&#39;f(x)&#39;, &#39;Tangent line (x=1)&#39;])
-#legend图例
+<pre class=" language-python"><code class="language-python">x <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#起点0，终点3，步长0.1</span>
+plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token punctuation">[</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> x <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token string">'f(x)'</span><span class="token punctuation">,</span> legend<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'f(x)'</span><span class="token punctuation">,</span> <span class="token string">'Tangent line (x=1)'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#legend图例</span>
 </code></pre>
 
                 
